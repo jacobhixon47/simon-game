@@ -3,14 +3,26 @@ function Simon() {
   this.colors = ['red', 'green', 'blue', 'yellow'];
   this.currentGame = [];
   this.currentPlayer = [];
+  this.gameOver = false;
 }
 
-Simon.prototype.play = function() {
+Simon.prototype.pattern = function() {
   min = 0
   max = 3
   colorIndex = Math.floor(Math.random()*(max-min+1)+min);
   this.currentGame.push(this.colors[colorIndex]);
-}
+};
+
+Simon.prototype.answerCheck = function() {
+  for (i = 0; i <= this.currentPlayer.length; i++) {
+    if (this.currentPlayer[i] !== this.currentGame[i]) {
+      this.gameOver = true;
+    } else {
+      this.gameOver = false;
+    }
+  }
+};
+
 
 exports.simonModule = Simon;
 
@@ -21,16 +33,30 @@ $(document).ready(function() {
   var simon = new Simon();
   $('#play').click(function(event) {
     event.preventDefault();
-    $('#pattern-result').empty()
-    simon.play()
+    simon.currentGame = [];
+    simon.currentPlayer = [];
+    simon.gameOver = false;
+    simon.pattern()
     simon.currentGame.forEach(function(color, i) {
       setTimeout(function() {
-        $('#' + color + '-button').addClass('lighten-3');
+        $('#' + color).addClass('lighten-3');
       }, 800 * i);
       setTimeout(function() {
-        $('#' + color + '-button').removeClass('lighten-3');
+        $('#' + color).removeClass('lighten-3');
       }, (800 * (i + 1))-200);
     });
+
+  });
+  $('.game-button').click(function(event) {
+    event.preventDefault();
+    simon.currentPlayer.push($(this).attr('id'));
+    simon.answerCheck();
+    if (simon.currentPlayer === simon.currentGame && simon.gameOver === false) {
+      simon.pattern();
+    }
+    else {
+      alert('you lose');
+    }
   });
 });
 
