@@ -4,8 +4,38 @@
     <script
   src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="build/js/app.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <link rel="stylesheet" href="css/styles.css">
     <title>Simon Game</title>
   </head>
   <body>
+    <div class="container">
+      <h1 class="center-align">SIMON DAWG</h1>
+      <div class="row">
+        <div class="col s4 offset-s4 center-align">
+          <a id="play" class="btn btn-large waves-effect waves-light">Play</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6">
+          <div class="green white-text game-button" id="green-button">
+          </div>
+        </div>
+        <div class="col s6">
+          <div class="red white-text game-button" id="red-button">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6">
+          <div class="yellow white-text game-button" id="yellow-button">
+          </div>
+        </div>
+        <div class="col s6">
+          <div class="blue white-text game-button" id="blue-button">
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

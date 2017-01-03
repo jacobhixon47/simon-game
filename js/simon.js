@@ -1,6 +1,7 @@
 function Simon() {
   this.colors = ['red', 'green', 'blue', 'yellow'];
   this.currentGame = [];
+  this.currentPlayer = [];
 }
 
 Simon.prototype.play = function() {
@@ -8,8 +9,6 @@ Simon.prototype.play = function() {
   max = 3
   colorIndex = Math.floor(Math.random()*(max-min+1)+min);
   this.currentGame.push(this.colors[colorIndex]);
-  for (i = 0; i <=  this.currentGame.length; i++) {
-  }
 }
 
 exports.simonModule = Simon;
