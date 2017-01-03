@@ -2,11 +2,12 @@ body {
   background-color: black;
 }
 
-.game-button {
-  height: 300px;
-}
-
 .loser-button {
   background-color: white;
   color: black;
+}
+
+.game-button {
+  height: 30vh;
+  border-radius: 1000px;
 }

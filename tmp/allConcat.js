@@ -23,6 +23,8 @@ $(document).ready(function() {
   });
   $('.game-button').click(function(event) {
     event.preventDefault();
+    $(this).toggleClass('darken-3');
+    $(this).delay(500).toggleClass('darken-3');
     simon.currentPlayer.push($(this).attr('id'));
     simon.answerCheck();
     if (simon.gameOver === true) {
