@@ -7,14 +7,15 @@ function Simon() {
 }
 
 Simon.prototype.pattern = function() {
-  min = 0
-  max = 3
+  min = 0;
+  max = 3;
   colorIndex = Math.floor(Math.random()*(max-min+1)+min);
   this.currentGame.push(this.colors[colorIndex]);
+  this.currentPlayer = [];
 };
 
 Simon.prototype.answerCheck = function() {
-  for (i = 0; i <= this.currentPlayer.length; i++) {
+  for (i = 0; i <= this.currentPlayer.length - 1; i++) {
     if (this.currentPlayer[i] !== this.currentGame[i]) {
       this.gameOver = true;
     } else {
@@ -33,17 +34,20 @@ $(document).ready(function() {
   var simon = new Simon();
   $('#play').click(function(event) {
     event.preventDefault();
+    $(this).removeClass('loser-button')
     simon.currentGame = [];
     simon.currentPlayer = [];
     simon.gameOver = false;
-    simon.pattern()
+    simon.pattern();
     simon.currentGame.forEach(function(color, i) {
       setTimeout(function() {
+        $('#' + color).removeClass('darken-3');
         $('#' + color).addClass('lighten-3');
-      }, 800 * i);
+      }, 600 * i);
       setTimeout(function() {
         $('#' + color).removeClass('lighten-3');
-      }, (800 * (i + 1))-200);
+        $('#' + color).addClass('darken-3');
+      }, (600 * (i + 1))-200);
     });
 
   });
@@ -51,11 +55,25 @@ $(document).ready(function() {
     event.preventDefault();
     simon.currentPlayer.push($(this).attr('id'));
     simon.answerCheck();
-    if (simon.currentPlayer === simon.currentGame && simon.gameOver === false) {
-      simon.pattern();
-    }
-    else {
-      alert('you lose');
+    if (simon.gameOver === true) {
+      alert("its over fool");
+      $('#play').addClass('loser-button');
+    } else if (simon.gameOver === false) {
+      if (simon.currentPlayer.length === simon.currentGame.length) {
+        simon.pattern();
+        setTimeout(function() {
+          simon.currentGame.forEach(function(color, i) {
+            setTimeout(function() {
+              $('#' + color).removeClass('darken-3');
+              $('#' + color).addClass('lighten-3');
+            }, 600 * i);
+            setTimeout(function() {
+              $('#' + color).removeClass('lighten-3');
+              $('#' + color).addClass('darken-3');
+            }, (600 * (i + 1))-200);
+          });
+        }, 800);
+      }
     }
   });
 });

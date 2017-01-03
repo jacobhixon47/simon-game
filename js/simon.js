@@ -6,14 +6,15 @@ function Simon() {
 }
 
 Simon.prototype.pattern = function() {
-  min = 0
-  max = 3
+  min = 0;
+  max = 3;
   colorIndex = Math.floor(Math.random()*(max-min+1)+min);
   this.currentGame.push(this.colors[colorIndex]);
+  this.currentPlayer = [];
 };
 
 Simon.prototype.answerCheck = function() {
-  for (i = 0; i <= this.currentPlayer.length; i++) {
+  for (i = 0; i <= this.currentPlayer.length - 1; i++) {
     if (this.currentPlayer[i] !== this.currentGame[i]) {
       this.gameOver = true;
     } else {
